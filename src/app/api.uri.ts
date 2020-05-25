@@ -14,6 +14,6 @@ export class ApiUri {
   public static transactionTypes: string = ApiUri.getBase() + '/transaction/types';
 
   public static getBase(): string {
-    return 'https://home-budget-backend.herokuapp.com/';
+    return 'https://home-budget-backend.herokuapp.com';
   }
 }
