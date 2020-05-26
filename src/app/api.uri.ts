@@ -1,3 +1,5 @@
+import {environment} from '../environments/environment';
+
 export class ApiUri {
   public static register: string = ApiUri.getBase() + '/register';
   public static login: string = ApiUri.getBase() + '/login';
@@ -14,6 +16,6 @@ export class ApiUri {
   public static transactionTypes: string = ApiUri.getBase() + '/transaction/types';
 
   public static getBase(): string {
-    return 'https://home-budget-oziaka.herokuapp.com/';
+    return environment.baseApiUrl;
   }
 }

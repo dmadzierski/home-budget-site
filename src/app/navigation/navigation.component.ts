@@ -1,5 +1,6 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-navigation',
