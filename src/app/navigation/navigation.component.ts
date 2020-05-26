@@ -12,7 +12,6 @@ export class NavigationComponent implements OnInit, OnChanges {
 
   constructor(private auth: AuthService) {
     auth.authenticate(undefined, undefined);
-    console.log(environment.baseApiUrl);
   }
 
   isAuth() {
