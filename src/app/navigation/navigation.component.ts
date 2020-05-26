@@ -1,5 +1,6 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-navigation',
@@ -11,6 +12,7 @@ export class NavigationComponent implements OnInit, OnChanges {
 
   constructor(private auth: AuthService) {
     auth.authenticate(undefined, undefined);
+    console.log(environment.baseApiUrl);
   }
 
   isAuth() {
