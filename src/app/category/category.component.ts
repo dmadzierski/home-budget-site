@@ -8,7 +8,7 @@ import {CategoryHttpService} from './category.http.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  categories: Array<Category>;
+  categories: Array<Category> = new Array<Category>();
 
 
   constructor(private categoryHttpService: CategoryHttpService) {
@@ -19,9 +19,8 @@ export class CategoryComponent implements OnInit {
   }
 
   private getCategories() {
-    this.categoryHttpService.getCategories().subscribe(success => {
-      console.log(success);
-      this.categories = success;
+    this.categoryHttpService.getUserCategories().subscribe(success => {
+      this.categories = success.map(k => new Category().fromJSON(k)).map(k => k.mapToView());
     }, error => {
     });
   }

@@ -16,7 +16,8 @@ export class CategoryHttpService {
     return this.http.put(ApiUri.addCategory, category);
   }
 
-  getCategories(): Observable<any> {
+  getUserCategories(): Observable<any> {
     return this.http.get(ApiUri.userCategories);
   }
+
 }

@@ -1,0 +1,16 @@
+<table class="table table-hover table-striped text-center">
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Type</th>
+    <th>Edit</th>
+    <th>Remove</th>
+  </tr>
+  <tr *ngFor="let transaction of transactions; let i = index">
+    <td>{{transaction.name}}</td>
+    <td>{{transaction.price}}</td>
+    <td>{{transaction.category.name}}</td>
+    <td>{{transaction.category.transactionType.toString() | titlecase}}</td>
+  </tr>
+</table>

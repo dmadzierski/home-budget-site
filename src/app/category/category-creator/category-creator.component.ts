@@ -30,7 +30,6 @@ export class CategoryCreatorComponent implements OnInit {
   addCategory() {
     this.category.transactionType = this.transactionTypeString.toUpperCase().replace(' ', '_');
     this.categoryHttpService.addCategory(this.category).subscribe(success => {
-        console.log(success);
       },
       error => {
         this.error = error.error.errors;

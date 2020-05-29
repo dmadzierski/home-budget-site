@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit {
-  wallets: Array<Wallet>;
+  wallets: Array<Wallet> = new Array<Wallet>();
 
   constructor(private http: HttpClient, private walletHttpService: WalletHttpService, private router: Router) {
     this.getWallets();
@@ -27,7 +27,9 @@ export class WalletComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showWalletsDetails(id: number) {
+  showWalletsDetails(id: bigint) {
     this.router.navigateByUrl('/wallet/details?id=' + id);
   }
+
+
 }

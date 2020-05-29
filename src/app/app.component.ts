@@ -12,7 +12,8 @@ export class AppComponent {
   title = 'Home budget';
   private protectedRoutes: Array<string> = [
     '/wallet',
-    '/category'
+    '/category',
+    '/user'
   ];
 
   constructor(private router: Router, private authService: AuthService, private activatedRoute: ActivatedRoute) {

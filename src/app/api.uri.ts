@@ -14,8 +14,13 @@ export class ApiUri {
   public static userCategories: string = ApiUri.category;
 
   public static transactionTypes: string = ApiUri.getBase() + '/transaction/types';
+  public static getUser: string = ApiUri.getBase() + '/getUser';
 
   public static getBase(): string {
     return environment.baseApiUrl;
+  }
+
+  static addTransaction(walletId: bigint, categoryId: bigint) {
+    return ApiUri.getBase() + '/wallet/' + walletId + '/category/' + categoryId + '/transaction/add';
   }
 }

@@ -1,20 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {Category} from '../models/category.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {Transaction} from '../models/transaction.model';
 
 @Component({
-  selector: 'app-transaction',
+  selector: 'transactions-viewer',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-  categories: Array<Category>;
+  @Input()
+  transactions: Array<Transaction>;
 
   constructor() {
+    this.transactions = new Array<Transaction>();
   }
 
   ngOnInit(): void {
-  }
-
-  showDetails(id: any) {
   }
 }

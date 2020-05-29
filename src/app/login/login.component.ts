@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../models/user.model';
 import {AuthService} from '../auth.service';
+import {UserHttpService} from '../user/user.http.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userHttpService: UserHttpService) {
   }
 
   ngOnInit(): void {
@@ -24,6 +26,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.authenticate(this.user, () => {
+      let walletId: any;
+      this.userHttpService.getUser().subscribe(success => {
+          this.router.navigateByUrl('/wallet/details?id=' + success.favoriteWalletId);
+        }
+      );
       this.router.navigateByUrl('/');
     });
     return false;
