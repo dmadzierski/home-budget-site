@@ -1,16 +1,19 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
-    <h1>Wallet: {{wallet?.name}}</h1>
-    <h1>Balance: {{wallet?.balance}}</h1>
-    <h1 *ngFor="let transaction of wallet?.transactions">
-
-    </h1>
-    <transactions-viewer [transactions]="wallet.transactions"></transactions-viewer>
-  </div>
-  <div class="col-md-1 offset-md-1 add-button" role="button">
-    <a (click)="addTransaction(id)" class="add-button" role="button">
-      Dodaj transakcję
-      <img src="/assets/icon/plus-icon.png"/>
-    </a>
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+          <h1>Wallet: {{wallet?.name}}</h1>
+          <h1>Balance: {{wallet?.balance}}</h1>
+        </div>
+        <div class="col-3 add-button" role="button">
+          <a (click)="addTransaction(id)" class="add-button text-center" role="button">
+            Add transaction
+            <img src="/assets/icon/plus-icon.png"/>
+          </a>
+        </div>
+      </div>
+    </div>
+    <transactions-viewer [transactions]="wallet?.transactions" [walletId]="id"></transactions-viewer>
   </div>
 </div>

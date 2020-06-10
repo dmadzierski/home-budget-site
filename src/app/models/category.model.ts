@@ -15,17 +15,4 @@ export class Category extends Serializable {
     return this;
   }
 
-  public mapToEnum(): Category {
-    this.transactionType = this.transactionType.toUpperCase().replace(' ', '_');
-    return this;
-  }
-
-  public transactionTypeToString(): string {
-    return (
-      this.transactionType.substring(0, 1).toUpperCase() +
-      this.transactionType.substring(1, this.transactionType.length).toLowerCase()
-    )
-      .replace('_', ' ');
-  }
-
 }

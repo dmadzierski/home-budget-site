@@ -14,7 +14,7 @@ export class ApiUri {
   public static userCategories: string = ApiUri.category;
 
   public static transactionTypes: string = ApiUri.getBase() + '/transaction/types';
-  public static getUser: string = ApiUri.getBase() + '/getUser';
+  public static userProfile: string = ApiUri.getBase() + '/userProfile';
 
   public static getBase(): string {
     return environment.baseApiUrl;
@@ -22,5 +22,17 @@ export class ApiUri {
 
   static addTransaction(walletId: bigint, categoryId: bigint) {
     return ApiUri.getBase() + '/wallet/' + walletId + '/category/' + categoryId + '/transaction/add';
+  }
+
+  static removeTransaction(walletId: bigint, transactionId: bigint): string {
+    return ApiUri.wallet + '/' + walletId + '/transaction/' + transactionId;
+  }
+
+  static getBorrowTransactions(walletId: bigint) {
+    return ApiUri.wallet + '/' + walletId + '/borrow_transaction';
+  }
+
+  static getLoanTransaction(walletId: bigint) {
+    return ApiUri.wallet + '/' + walletId + '/loan_transaction';
   }
 }

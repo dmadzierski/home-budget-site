@@ -20,14 +20,21 @@
         <input [(ngModel)]="transaction.date" class="form-control" name="date" type="date"/>
       </div>
       <div class="form-group">
-        <label>Select transaction type</label>
-        <label>
-          <select [(ngModel)]="categoryId" class="form-control" name="transactionType">
-            <option *ngFor="let category of categories" [value]="category.id">
-              {{category.name}}
-            </option>
-          </select>
-        </label>
+        <label>Select category</label>
+        <select (click)="this.setUserChooseTransactionBack()" [(ngModel)]="categoryId" class="form-control"
+                name="transactionType">
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="userChooseTransactionBack" class="form-group">
+        <label>Select transaction</label>
+        <select [(ngModel)]="transaction.transactionIdReference" class="form-control" name="transactionType">
+          <option *ngFor="let transaction of loanOrBorrowTransactions" [value]="transaction.id">
+            {{transaction.name}} {{transaction.description}} {{transaction.price}} {{transaction.category.transactionType}}
+          </option>
+        </select>
       </div>
       <button class="btn btn-block btn-outline-success" type="submit">Submit</button>
     </form>

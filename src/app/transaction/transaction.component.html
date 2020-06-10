@@ -3,7 +3,6 @@
     <th>Name</th>
     <th>Price</th>
     <th>Category</th>
-    <th>Type</th>
     <th>Edit</th>
     <th>Remove</th>
   </tr>
@@ -11,6 +10,15 @@
     <td>{{transaction.name}}</td>
     <td>{{transaction.price}}</td>
     <td>{{transaction.category.name}}</td>
-    <td>{{transaction.category.transactionType.toString() | titlecase}}</td>
+    <td>
+      <a (click)="editTransaction(transaction.id)" class="pointer" role="button">
+        <img src="/assets/icon/edit-icon.png"/>
+      </a>
+    </td>
+    <td>
+      <a (click)="removeTransaction(transaction.id)" class="pointer" role="button">
+        <img src="/assets/icon/remove-icon.png"/>
+      </a>
+    </td>
   </tr>
 </table>

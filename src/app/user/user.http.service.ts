@@ -10,7 +10,7 @@ export class UserHttpService {
   constructor(private http: HttpClient) {
   }
 
-  getUser() {
-    return this.http.get(ApiUri.getUser);
+  userProfile() {
+    return this.http.get(ApiUri.userProfile);
   }
 }

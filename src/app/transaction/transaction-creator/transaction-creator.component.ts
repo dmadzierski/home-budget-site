@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {Transaction} from '../../models/transaction.model';
 import {TransactionHttpService} from '../transaction.http.service';
 import {ActivatedRoute} from '@angular/router';
@@ -10,13 +10,15 @@ import {CategoryHttpService} from '../../category/category.http.service';
   templateUrl: './transaction-creator.component.html',
   styleUrls: ['./transaction-creator.component.css']
 })
-export class TransactionCreatorComponent implements OnInit {
+export class TransactionCreatorComponent implements OnInit, OnChanges {
 
+  loanOrBorrowTransactions: Array<Transaction>;
   error: any;
   transaction: Transaction = new Transaction();
   categoryId: bigint;
   walletId: bigint;
   categories: Array<Category> = new Array<Category>();
+  userChooseTransactionBack: boolean;
 
   constructor(private transactionHttpService: TransactionHttpService,
               private activatedRoute: ActivatedRoute,
@@ -26,11 +28,13 @@ export class TransactionCreatorComponent implements OnInit {
       .subscribe(params => {
         this.walletId = params['id'];
       });
+    this.initUserCategories();
+  }
+
+  ngOnChanges(): void {
   }
 
   ngOnInit(): void {
-    this.initUserCategories();
-    ;
   }
 
   initUserCategories() {
@@ -43,12 +47,50 @@ export class TransactionCreatorComponent implements OnInit {
   }
 
   addTransaction() {
-    console.log(this.transaction);
+    if (!this.userChooseTransactionBack) {
+      this.transaction.transactionIdReference = null;
+    }
     this.transactionHttpService.save(this.transaction, this.walletId, this.categoryId).subscribe(success => {
+      this.error = null;
     }, error => {
-      console.log(error);
       this.error = error.error.errors;
     });
-
   }
+
+  initLoanTransaction() {
+    this.transactionHttpService.getLoanTransaction(this.walletId).subscribe((success: Array<Transaction>) => {
+      if (success.length > 0) {
+        this.transaction.transactionIdReference = success[0]['id'];
+        this.loanOrBorrowTransactions = success;
+      }
+    }, error => {
+    });
+  }
+
+  initBorrowTransaction() {
+    this.transactionHttpService.getBorrowTransaction(this.walletId).subscribe((success: Array<Transaction>) => {
+      this.transaction.transactionIdReference = success[0]['id'];
+      this.loanOrBorrowTransactions = success;
+    }, error => {
+    });
+  }
+
+  setUserChooseTransactionBack(): void {
+    switch (this.categories.filter(c => c.id == this.categoryId).map(category => category.transactionType)[0]) {
+      case 'LOAN_BACK': {
+        this.initLoanTransaction();
+        this.userChooseTransactionBack = true;
+        break;
+      }
+      case 'BORROW_BACK': {
+        this.initBorrowTransaction();
+        this.userChooseTransactionBack = true;
+        break;
+      }
+      default: {
+        this.userChooseTransactionBack = false;
+      }
+    }
+  }
+
 }
