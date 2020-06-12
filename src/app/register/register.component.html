@@ -11,6 +11,10 @@
         <input [(ngModel)]="user.password" class="form-control" name="password" type="password">
         <error [errorsList]="errors?.password "></error>
       </div>
+      <div class="form-group">
+        <label>Repeat password</label>
+        <input [(ngModel)]="repeatPassoword" class="form-control" name="password" type="password">
+      </div>
       <button (click)="registerUser()" class="btn btn-block btn-outline-success" type="submit">Submit</button>
     </form>
   </div>
