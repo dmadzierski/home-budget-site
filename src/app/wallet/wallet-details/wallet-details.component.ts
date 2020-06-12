@@ -25,7 +25,6 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-
   }
 
   addTransaction(id: bigint) {
@@ -33,6 +32,7 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    this.initWallet();
   }
 
   private initWallet() {
@@ -40,4 +40,6 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
       this.wallet = success;
     });
   }
+
+
 }

@@ -14,7 +14,7 @@ export class ApiUri {
   public static userCategories: string = ApiUri.category;
 
   public static transactionTypes: string = ApiUri.getBase() + '/transaction/types';
-  public static userProfile: string = ApiUri.getBase() + '/userProfile';
+  public static userProfile: string = ApiUri.getBase() + '/profile';
 
   public static getBase(): string {
     return environment.baseApiUrl;

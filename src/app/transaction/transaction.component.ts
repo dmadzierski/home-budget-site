@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Transaction} from '../models/transaction.model';
 import {TransactionHttpService} from './transaction.http.service';
 
@@ -13,6 +13,9 @@ export class TransactionComponent implements OnInit {
   @Input()
   walletId: bigint;
 
+  @Output()
+  updateWallet = new EventEmitter<boolean>();
+
   constructor(private transactionHttpService: TransactionHttpService) {
     this.transactions = new Array<Transaction>();
   }
@@ -26,7 +29,7 @@ export class TransactionComponent implements OnInit {
 
   removeTransaction(transactionId: bigint): void {
     this.transactionHttpService.removeTransaction(this.walletId, transactionId).subscribe(success => {
-      this.transactions = this.transactions.filter(c => c.id !== transactionId);
+      this.updateWallet.emit(true);
     }, error => {
     });
 

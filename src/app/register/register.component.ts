@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
       });
     } else {
       this.errors = {password: ['Password are not the same']};
-      console.log('elo');
     }
   }
 }

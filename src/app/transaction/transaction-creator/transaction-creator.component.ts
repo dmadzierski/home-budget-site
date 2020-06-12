@@ -44,10 +44,6 @@ export class TransactionCreatorComponent implements OnInit {
   }
 
   addTransaction() {
-    console.log(new Date(this.transaction.addingTime).toLocaleDateString());
-    console.log(new Date(this.transaction.addingTime).toLocaleDateString());
-    console.log(new Date(this.transaction.addingTime).toLocaleTimeString());
-    console.log(new Date(this.transaction.addingTime));
     if (!this.userChooseTransactionBack) {
       this.transaction.transactionIdReference = null;
     }

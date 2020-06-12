@@ -12,8 +12,7 @@ import {UserHttpService} from '../user/user.http.service';
 export class LoginComponent implements OnInit {
   user: User = new User();
 
-  emailErrors: Array<string> = new Array<string>();
-  passwordErrors: Array<string> = new Array<string>();
+  errors: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,11 +27,12 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(this.user, () => {
       this.userHttpService.userProfile().subscribe(success => {
           this.router.navigateByUrl('/wallet/details?id=' + success['favoriteWalletId']);
-        }, error => {
-          this.router.navigateByUrl('/');
         }
       );
     });
+    if (this.user.password?.length > 0 && this.user.email?.length > 0) {
+      this.errors = {email: ['Incompatibile user or password or both']};
+    }
     return false;
   }
 }
