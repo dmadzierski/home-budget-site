@@ -7,6 +7,6 @@ export class Transaction extends Serializable {
   public description: string;
   public price: bigint;
   public category: Category;
-  public date: Date;
+  public addingTime: Date;
   public transactionIdReference: bigint;
 }

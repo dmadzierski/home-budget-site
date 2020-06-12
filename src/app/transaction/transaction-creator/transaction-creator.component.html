@@ -17,11 +17,11 @@
       </div>
       <div class="form-group">
         <label>Adding time</label>
-        <input [(ngModel)]="transaction.date" class="form-control" name="date" type="date"/>
+        <input [(ngModel)]="transaction.addingTime" class="form-control" name="date" type="datetime-local"/>
       </div>
       <div class="form-group">
         <label>Select category</label>
-        <select (click)="this.setUserChooseTransactionBack()" [(ngModel)]="categoryId" class="form-control"
+        <select (change)="this.setUserChooseTransactionBack()" [(ngModel)]="categoryId" class="form-control"
                 name="transactionType">
           <option *ngFor="let category of categories" [value]="category.id">
             {{category.name}}
@@ -32,7 +32,7 @@
         <label>Select transaction</label>
         <select [(ngModel)]="transaction.transactionIdReference" class="form-control" name="transactionType">
           <option *ngFor="let transaction of loanOrBorrowTransactions" [value]="transaction.id">
-            {{transaction.name}} {{transaction.description}} {{transaction.price}} {{transaction.category.transactionType}}
+            {{transaction.name}} {{transaction.description}} {{transaction.price}} {{transaction.category.transactionType|titlecase}} {{transaction.addingTime|date}}
           </option>
         </select>
       </div>

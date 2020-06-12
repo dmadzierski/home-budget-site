@@ -26,10 +26,10 @@ export class TransactionComponent implements OnInit {
 
   removeTransaction(transactionId: bigint): void {
     this.transactionHttpService.removeTransaction(this.walletId, transactionId).subscribe(success => {
-      console.log(success);
+      this.transactions = this.transactions.filter(c => c.id !== transactionId);
     }, error => {
-      console.log(error);
     });
 
   }
+
 }

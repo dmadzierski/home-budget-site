@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Transaction} from '../../models/transaction.model';
 import {TransactionHttpService} from '../transaction.http.service';
 import {ActivatedRoute} from '@angular/router';
@@ -10,7 +10,7 @@ import {CategoryHttpService} from '../../category/category.http.service';
   templateUrl: './transaction-creator.component.html',
   styleUrls: ['./transaction-creator.component.css']
 })
-export class TransactionCreatorComponent implements OnInit, OnChanges {
+export class TransactionCreatorComponent implements OnInit {
 
   loanOrBorrowTransactions: Array<Transaction>;
   error: any;
@@ -31,9 +31,6 @@ export class TransactionCreatorComponent implements OnInit, OnChanges {
     this.initUserCategories();
   }
 
-  ngOnChanges(): void {
-  }
-
   ngOnInit(): void {
   }
 
@@ -47,6 +44,10 @@ export class TransactionCreatorComponent implements OnInit, OnChanges {
   }
 
   addTransaction() {
+    console.log(new Date(this.transaction.addingTime).toLocaleDateString());
+    console.log(new Date(this.transaction.addingTime).toLocaleDateString());
+    console.log(new Date(this.transaction.addingTime).toLocaleTimeString());
+    console.log(new Date(this.transaction.addingTime));
     if (!this.userChooseTransactionBack) {
       this.transaction.transactionIdReference = null;
     }
@@ -69,14 +70,17 @@ export class TransactionCreatorComponent implements OnInit, OnChanges {
 
   initBorrowTransaction() {
     this.transactionHttpService.getBorrowTransaction(this.walletId).subscribe((success: Array<Transaction>) => {
-      this.transaction.transactionIdReference = success[0]['id'];
-      this.loanOrBorrowTransactions = success;
+      if (success.length > 0) {
+        this.transaction.transactionIdReference = success[0]['id'];
+        this.loanOrBorrowTransactions = success;
+      }
     }, error => {
     });
   }
 
   setUserChooseTransactionBack(): void {
-    switch (this.categories.filter(c => c.id == this.categoryId).map(category => category.transactionType)[0]) {
+    const tmpCategories: Array<Category> = this.categories;
+    switch (tmpCategories.filter(c => c.id == this.categoryId).map(category => category.transactionType)[0]) {
       case 'LOAN_BACK': {
         this.initLoanTransaction();
         this.userChooseTransactionBack = true;
@@ -88,9 +92,15 @@ export class TransactionCreatorComponent implements OnInit, OnChanges {
         break;
       }
       default: {
+        this.clearLoanOrBorrowTransactions();
         this.userChooseTransactionBack = false;
       }
     }
   }
+
+  private clearLoanOrBorrowTransactions() {
+    this.loanOrBorrowTransactions = new Array<Transaction>();
+  }
+
 
 }

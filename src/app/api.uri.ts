@@ -25,7 +25,7 @@ export class ApiUri {
   }
 
   static removeTransaction(walletId: bigint, transactionId: bigint): string {
-    return ApiUri.wallet + '/' + walletId + '/transaction/' + transactionId;
+    return ApiUri.wallet + '/' + walletId + '/transaction/remove/' + transactionId;
   }
 
   static getBorrowTransactions(walletId: bigint) {
