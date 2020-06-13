@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <transactions-viewer [transactions]="wallet?.transactions" (updateWallet)="initWallet()"
+    <transactions-viewer (updateWallet)="initWallet()" [transactions]="wallet?.transactions"
                          [walletId]="id"></transactions-viewer>
   </div>
 </div>

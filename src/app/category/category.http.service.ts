@@ -20,4 +20,7 @@ export class CategoryHttpService {
     return this.http.get(ApiUri.userCategories);
   }
 
+  removeCategory(id: bigint) {
+    return this.http.delete(ApiUri.removeCategory(id));
+  }
 }

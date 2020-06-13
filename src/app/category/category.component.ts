@@ -18,6 +18,12 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  removeCategory(id: bigint) {
+    this.categoryHttpService.removeCategory(id).subscribe(success => {
+      this.getCategories();
+    });
+  }
+
   private getCategories() {
     this.categoryHttpService.getUserCategories().subscribe(success => {
       this.categories = success.map(k => new Category().fromJSON(k)).map(k => k.mapToView());

@@ -21,14 +21,23 @@ export class TransactionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initWalletTransactions();
   }
 
   editTransaction(id: bigint) {
 
   }
 
+  initWalletTransactions() {
+    this.transactionHttpService.getWalletTransactions(this.walletId).subscribe((success: Array<Transaction>) => {
+      this.transactions = success;
+    }, error => {
+    });
+  }
+
   removeTransaction(transactionId: bigint): void {
     this.transactionHttpService.removeTransaction(this.walletId, transactionId).subscribe(success => {
+      this.transactions = this.transactions.filter(transaction => transaction.id !== transactionId);
       this.updateWallet.emit(true);
     }, error => {
     });

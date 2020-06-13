@@ -35,4 +35,12 @@ export class ApiUri {
   static getLoanTransaction(walletId: bigint) {
     return ApiUri.wallet + '/' + walletId + '/loan_transaction';
   }
+
+  static removeCategory(id: bigint) {
+    return ApiUri.category + '/remove/' + id;
+  }
+
+  static getWalletTransactions(walletId: bigint) {
+    return ApiUri.wallet + '/' + walletId + '/transactions';
+  }
 }

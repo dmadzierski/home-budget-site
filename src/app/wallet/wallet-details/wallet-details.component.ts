@@ -35,7 +35,7 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
     this.initWallet();
   }
 
-  private initWallet() {
+  initWallet() {
     this.walletHttpService.getWalletWithDetails(this.id).subscribe(success => {
       this.wallet = success;
     });

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         }
       );
     });
-    if (this.user.password?.length > 0 && this.user.email?.length > 0) {
+    if (this.authService.isAuthenticated() && this.user.password?.length > 0 && this.user.email?.length > 0) {
       this.errors = {email: ['Incompatibile user or password or both']};
     }
     return false;

@@ -8,6 +8,7 @@
           <th>Name</th>
           <th>Description</th>
           <th>Type</th>
+          <th>Remove</th>
         </tr>
         <tr *ngFor="let category of categories; let i = index">
           <td><a class="text-decoration-none text-black"
@@ -18,6 +19,9 @@
                  role="button"> {{category.description}}</a></td>
           <td><a class="text-decoration-none text-black"
                  role="button"> {{category.transactionType}}</a></td>
+          <td><a (click)="removeCategory(category.id)" class="pointer" role="button">
+            <img src="/assets/icon/remove-icon.png"/>
+          </a></td>
         </tr>
       </table>
     </div>

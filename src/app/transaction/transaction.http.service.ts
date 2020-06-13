@@ -32,4 +32,8 @@ export class TransactionHttpService {
   getLoanTransaction(walletId: bigint) {
     return this.http.get(ApiUri.getLoanTransaction(walletId));
   }
+
+  getWalletTransactions(walletId: bigint) {
+    return this.http.get(ApiUri.getWalletTransactions(walletId));
+  }
 }
