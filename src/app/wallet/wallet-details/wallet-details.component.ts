@@ -11,7 +11,7 @@ import {Wallet} from '../../models/wallet.model';
 export class WalletDetailsComponent implements OnInit, OnChanges {
 
   public wallet: Wallet;
-  id: bigint;
+  walletId: bigint;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -19,7 +19,7 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
     this.activatedRoute
       .queryParams
       .subscribe(params => {
-        this.id = params['id'];
+        this.walletId = params['walletId'];
       });
     this.initWallet();
   }
@@ -28,7 +28,7 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
   }
 
   addTransaction(id: bigint) {
-    this.router.navigateByUrl('/transaction/add?id=' + id);
+    this.router.navigateByUrl('/transaction/add?walletId=' + id);
   }
 
   ngOnChanges(): void {
@@ -36,10 +36,13 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
   }
 
   initWallet() {
-    this.walletHttpService.getWalletWithDetails(this.id).subscribe(success => {
+    this.walletHttpService.getWalletWithDetails(this.walletId).subscribe(success => {
       this.wallet = success;
     });
   }
 
 
+  editWallet() {
+
+  }
 }

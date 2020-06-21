@@ -4,19 +4,19 @@
     <th>Price</th>
     <th>Category</th>
     <th>Adding time</th>
-    <!--    <th>Edit</th>-->
+    <th>Edit</th>
     <th>Remove</th>
   </tr>
   <tr *ngFor="let transaction of transactions; let i = index">
     <td>{{transaction.name}}</td>
-    <td>{{transaction.price}}</td>
+    <td>{{transaction.price}}zł</td>
     <td>{{transaction.category.name}}</td>
-    <td>{{transaction.addingTime|date}}</td>
-    <!--    <td>-->
-    <!--      <a (click)="editTransaction(transaction.id)" class="pointer" role="button">-->
-    <!--        <img src="/assets/icon/edit-icon.png"/>-->
-    <!--      </a>-->
-    <!--    </td>-->
+    <td>{{transaction.dateOfPurchase|date}}</td>
+    <td>
+      <a (click)="editTransaction(transaction.id)" class="pointer" role="button">
+        <img src="/assets/icon/edit-icon.png"/>
+      </a>
+    </td>
     <td>
       <a (click)="removeTransaction(transaction.id)" class="pointer" role="button">
         <img src="/assets/icon/remove-icon.png"/>

@@ -2,19 +2,24 @@
   <div class="col-md-6 offset-md-3">
     <div class="container">
       <div class="row">
-        <div class="col-9">
-          <h1>Wallet: {{wallet?.name}}</h1>
-          <h1>Balance: {{wallet?.balance}}</h1>
+        <div class="col-6">
+          <h1>{{wallet?.name}}</h1>
+          <h1>Balance: {{wallet?.balance}}zł</h1>
+        </div>
+        <div class="col-3 edit-button" role="button">
+          <a (click)="editWallet()" class=" text-center" role="button">
+            <img class="p-2" src="/assets/icon/edit-icon-big.png"/> Edit wallet
+
+          </a>
         </div>
         <div class="col-3 add-button" role="button">
-          <a (click)="addTransaction(id)" class="add-button text-center" role="button">
-            Add transaction
-            <img src="/assets/icon/plus-icon.png"/>
+          <a (click)="addTransaction(walletId)" class="add-button text-center" role="button">
+            <img class="p-2" src="/assets/icon/plus-icon.png"/>Add transaction
           </a>
         </div>
       </div>
     </div>
     <transactions-viewer (updateWallet)="initWallet()" [transactions]="wallet?.transactions"
-                         [walletId]="id"></transactions-viewer>
+                         [walletId]="walletId"></transactions-viewer>
   </div>
 </div>

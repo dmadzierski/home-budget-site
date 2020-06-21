@@ -36,4 +36,12 @@ export class TransactionHttpService {
   getWalletTransactions(walletId: bigint) {
     return this.http.get(ApiUri.getWalletTransactions(walletId));
   }
+
+  getTransaction(walletId: bigint, transactionId: bigint) {
+    return this.http.get(ApiUri.getTransaction(walletId, transactionId));
+  }
+
+  edit(transaction: Transaction, walletId: bigint) {
+    return this.http.post(ApiUri.editTransaction(walletId), transaction);
+  }
 }

@@ -18,9 +18,9 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeCategory(id: bigint) {
-    this.categoryHttpService.removeCategory(id).subscribe(success => {
-      this.getCategories();
+  removeCategory(categoyrId: bigint) {
+    this.categoryHttpService.removeCategory(categoyrId).subscribe(success => {
+      this.categories = this.categories.filter(category => category.id !== categoyrId);
     });
   }
 

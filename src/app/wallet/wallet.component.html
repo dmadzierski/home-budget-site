@@ -2,20 +2,17 @@
   <div class="col-md-6 offset-md-3">
     <div *ngIf="wallets.length > 0;else noWallets">
       <h3 class="text-center text-vertical-center">Wallet list</h3>
-      <table class="table table-hover table-striped text-center">
+      <table class="table table-hover text-center">
         <tr>
           <th></th>
           <th>Name</th>
           <th>Balance</th>
         </tr>
-        <tr *ngFor="let wallet of wallets; let i = index">
-          <td>
-            <a (click)="showWalletsDetails(wallet.id)" class="text-decoration-none text-black"
-               role="button"> {{i + 1}}</a></td>
-          <td><a (click)="showWalletsDetails(wallet.id)" class="text-decoration-none text-black"
-                 role="button"> {{wallet.name}}</a></td>
-          <td><a (click)="showWalletsDetails(wallet.id)" class="text-decoration-none text-black"
-                 role="button"> {{wallet.balance}}</a></td>
+        <tr (click)="showWalletsDetails(wallet.id)" *ngFor="let wallet of wallets; let i = index" class="pointer"
+            role="button">
+          <td>{{i + 1}}</td>
+          <td>{{wallet.name}}</td>
+          <td> {{wallet.balance}}</td>
         </tr>
       </table>
     </div>

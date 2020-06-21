@@ -26,7 +26,7 @@ export class TransactionCreatorComponent implements OnInit {
     this.activatedRoute
       .queryParams
       .subscribe(params => {
-        this.walletId = params['id'];
+        this.walletId = params['walletId'];
       });
     this.initUserCategories();
   }
@@ -35,9 +35,17 @@ export class TransactionCreatorComponent implements OnInit {
   }
 
   initUserCategories() {
-    this.categoryHttpService.getUserCategories().subscribe(success => {
-        this.categoryId = success[0]['id'];
-        this.categories = success;
+    this.categoryHttpService.getUserCategories().subscribe((success: Array<Category>) => {
+        if (success.length > 0) {
+          this.categories = success;
+          this.categoryId = success[0]['id'];
+        } else {
+          this.error =
+            {
+              category:
+                ['You should have at least one category to add transaction']
+            };
+        }
       }
       , error => {
       });

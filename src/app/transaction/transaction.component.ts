@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Transaction} from '../models/transaction.model';
 import {TransactionHttpService} from './transaction.http.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'transactions-viewer',
@@ -16,7 +17,7 @@ export class TransactionComponent implements OnInit {
   @Output()
   updateWallet = new EventEmitter<boolean>();
 
-  constructor(private transactionHttpService: TransactionHttpService) {
+  constructor(private transactionHttpService: TransactionHttpService, private router: Router) {
     this.transactions = new Array<Transaction>();
   }
 
@@ -24,8 +25,8 @@ export class TransactionComponent implements OnInit {
     this.initWalletTransactions();
   }
 
-  editTransaction(id: bigint) {
-
+  editTransaction(transactionId: bigint) {
+    this.router.navigateByUrl('/transaction/edit?walletId=' + this.walletId + '&transactionId=' + transactionId);
   }
 
   initWalletTransactions() {

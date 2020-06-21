@@ -28,7 +28,7 @@ export class WalletComponent implements OnInit {
   }
 
   showWalletsDetails(id: bigint) {
-    this.router.navigateByUrl('/wallet/details?id=' + id);
+    this.router.navigateByUrl('/wallet/details?walletId=' + id);
   }
 
 

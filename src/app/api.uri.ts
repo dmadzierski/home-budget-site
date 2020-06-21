@@ -43,4 +43,12 @@ export class ApiUri {
   static getWalletTransactions(walletId: bigint) {
     return ApiUri.wallet + '/' + walletId + '/transactions';
   }
+
+  static getTransaction(walletId: bigint, transactionId: bigint) {
+    return ApiUri.wallet + '/' + walletId + '/transaction/' + transactionId;
+  }
+
+  static editTransaction(walletId: bigint) {
+    return ApiUri.wallet + '/' + walletId + '/transaction/edit';
+  }
 }

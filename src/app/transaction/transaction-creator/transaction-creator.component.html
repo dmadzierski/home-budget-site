@@ -16,8 +16,8 @@
         <error [errorsList]="error?.price"></error>
       </div>
       <div class="form-group">
-        <label>Adding time</label>
-        <input [(ngModel)]="transaction.addingTime" class="form-control" name="date" type="datetime-local"/>
+        <label>Date of purchase</label>
+        <input [(ngModel)]="transaction.dateOfPurchase" class="form-control" name="date" type="datetime-local"/>
       </div>
       <div class="form-group">
         <label>Select category</label>
@@ -27,12 +27,13 @@
             {{category.name}}
           </option>
         </select>
+        <error [errorsList]="error?.category"></error>
       </div>
       <div *ngIf="userChooseTransactionBack" class="form-group">
         <label>Select transaction</label>
         <select [(ngModel)]="transaction.transactionIdReference" class="form-control" name="transactionType">
           <option *ngFor="let transaction of loanOrBorrowTransactions" [value]="transaction.id">
-            {{transaction.name}} {{transaction.description}} {{transaction.price}} {{transaction.category.transactionType|titlecase}} {{transaction.addingTime|date}}
+            {{transaction.name}} {{transaction.description}} {{transaction.price}} {{transaction.category.transactionType|titlecase}} {{transaction.dateOfPurchase|date}}
           </option>
         </select>
       </div>

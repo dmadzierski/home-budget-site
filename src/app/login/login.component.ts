@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.authenticate(this.user, () => {
       this.userHttpService.userProfile().subscribe(success => {
-          this.router.navigateByUrl('/wallet/details?id=' + success['favoriteWalletId']);
+          this.router.navigateByUrl('/wallet/details?walletId=' + success['favoriteWalletId']);
         }
       );
     });
