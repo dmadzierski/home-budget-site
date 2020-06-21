@@ -8,6 +8,7 @@ export class ApiUri {
   public static wallet: string = ApiUri.getBase() + '/wallet';
   public static userWallets: string = ApiUri.wallet;
   public static addWallet: string = ApiUri.wallet + '/add';
+  public static editWallet: string = ApiUri.wallet + '/edit';
 
   public static category: string = ApiUri.getBase() + '/category';
   public static addCategory: string = ApiUri.category + '/add';
@@ -15,6 +16,7 @@ export class ApiUri {
 
   public static transactionTypes: string = ApiUri.getBase() + '/transaction/types';
   public static userProfile: string = ApiUri.getBase() + '/profile';
+  static restoreDefaultCategories: string = ApiUri.category + '/restoreDefaultCategories';
 
   public static getBase(): string {
     return environment.baseApiUrl;
@@ -50,5 +52,9 @@ export class ApiUri {
 
   static editTransaction(walletId: bigint) {
     return ApiUri.wallet + '/' + walletId + '/transaction/edit';
+  }
+
+  public static switchTransactionIsFinished(walletId: bigint, transactionId: bigint) {
+    return ApiUri.wallet + '/' + walletId + '/transaction/switchIsFinished/' + transactionId;
   }
 }

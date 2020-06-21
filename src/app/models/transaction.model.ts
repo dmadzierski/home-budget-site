@@ -9,4 +9,5 @@ export class Transaction extends Serializable {
   public category: Category;
   public dateOfPurchase: string;
   public transactionIdReference: bigint;
+  public isFinished: boolean;
 }

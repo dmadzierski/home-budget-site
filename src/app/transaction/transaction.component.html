@@ -6,6 +6,7 @@
     <th>Adding time</th>
     <th>Edit</th>
     <th>Remove</th>
+    <th>Finished</th>
   </tr>
   <tr *ngFor="let transaction of transactions; let i = index">
     <td>{{transaction.name}}</td>
@@ -20,6 +21,13 @@
     <td>
       <a (click)="removeTransaction(transaction.id)" class="pointer" role="button">
         <img src="/assets/icon/remove-icon.png"/>
+      </a>
+    </td>
+    <td>
+      <a (click)="switchFinished(transaction.id)" class="pointer" role="button"
+         *ngIf="isLoanOrBorrow(transaction)">
+        <img *ngIf="!transaction.isFinished" src="/assets/icon/un-finished-icon.png"/>
+        <img *ngIf="transaction.isFinished" src="/assets/icon/finished-icon.png"/>
       </a>
     </td>
   </tr>

@@ -24,4 +24,8 @@ export class WalletHttpService {
   getWalletWithDetails(id: bigint): Observable<any> {
     return this.http.get(ApiUri.wallet + '/' + id);
   }
+
+  editWallet(wallet: Wallet): Observable<any> {
+    return this.http.post(ApiUri.editWallet, wallet);
+  }
 }

@@ -11,7 +11,7 @@ import {User} from '../models/user.model';
 export class RegisterComponent implements OnInit {
   user: User = new User();
   errors: any;
-  repeatPassoword: string = '';
+  repeatPassword: string = '';
 
   constructor(private registerHttpService: RegisterHttpService, private router: Router) {
   }
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
 
   registerUser() {
-    if (this.user.password === this.repeatPassoword) {
+    if (this.user.password === this.repeatPassword) {
       this.registerHttpService.registerUser(this.user).subscribe(post => {
         this.router.navigate(['/login']);
       }, error => {

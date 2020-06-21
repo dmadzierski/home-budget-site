@@ -27,8 +27,8 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  addTransaction(id: bigint) {
-    this.router.navigateByUrl('/transaction/add?walletId=' + id);
+  addTransaction() {
+    this.router.navigateByUrl('/transaction/add?walletId=' + this.walletId);
   }
 
   ngOnChanges(): void {
@@ -43,6 +43,6 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
 
 
   editWallet() {
-
+    this.router.navigateByUrl('/wallet/edit?walletId=' + this.walletId);
   }
 }

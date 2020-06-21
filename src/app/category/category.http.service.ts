@@ -23,4 +23,8 @@ export class CategoryHttpService {
   removeCategory(id: bigint) {
     return this.http.delete(ApiUri.removeCategory(id));
   }
+
+  restoreDefaultCategories() {
+    return this.http.post(ApiUri.restoreDefaultCategories, {});
+  }
 }

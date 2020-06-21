@@ -44,4 +44,8 @@ export class TransactionHttpService {
   edit(transaction: Transaction, walletId: bigint) {
     return this.http.post(ApiUri.editTransaction(walletId), transaction);
   }
+
+  switchIsFinished(walletId: bigint, transactionId: bigint): Observable<any> {
+    return this.http.post(ApiUri.switchTransactionIsFinished(walletId, transactionId), {});
+  }
 }

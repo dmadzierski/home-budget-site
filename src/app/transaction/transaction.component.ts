@@ -45,4 +45,17 @@ export class TransactionComponent implements OnInit {
 
   }
 
+  switchFinished(transactionId: bigint) {
+    this.transactionHttpService.switchIsFinished(this.walletId, transactionId).subscribe((success: Transaction) => {
+      for (let i in this.transactions) {
+        if (this.transactions[i].id === transactionId) {
+          this.transactions[i] = success;
+        }
+      }
+    });
+  }
+
+  isLoanOrBorrow(transaction: Transaction) {
+    return transaction.category.transactionType === 'BORROW' || transaction.category.transactionType === 'LOAN';
+  }
 }
