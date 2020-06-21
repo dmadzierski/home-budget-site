@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-6 offset-3">
+    <form (ngSubmit)="editTransaction()">
+      <div class="form-group">
+        <label>Name</label>
+        <input [(ngModel)]="transaction.name" class="form-control" name="name"/>
+        <error [errorsList]="error?.name"></error>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input [(ngModel)]="transaction.description" class="form-control" name="description"/>
+      </div>
+      <div class="form-group">
+        <label>Price</label>
+        <input [(ngModel)]="transaction.price" class="form-control" name="price" type="number"/>
+        <error [errorsList]="error?.price"></error>
+      </div>
+      <div class="form-group">
+        <label>Date of purchase</label>
+        <input [(ngModel)]="dateOfPurchase" class="form-control" name="date-local"
+               type="datetime-local"/>
+      </div>
+      <button class="btn btn-block btn-outline-success" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
