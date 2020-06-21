@@ -19,9 +19,13 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
     this.activatedRoute
       .queryParams
       .subscribe(params => {
-        this.walletId = params['walletId'];
+        if (isNaN(Number(params['walletId']))) {
+          router.navigateByUrl('/wallet');
+        } else {
+          this.walletId = params['walletId'];
+          this.initWallet();
+        }
       });
-    this.initWallet();
   }
 
   ngOnInit(): void {

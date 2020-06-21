@@ -17,6 +17,7 @@ export class ApiUri {
   public static transactionTypes: string = ApiUri.getBase() + '/transaction/types';
   public static userProfile: string = ApiUri.getBase() + '/profile';
   static restoreDefaultCategories: string = ApiUri.category + '/restoreDefaultCategories';
+  static setFavoriteWallet: string = ApiUri.user + '/setFavoriteWallet';
 
   public static getBase(): string {
     return environment.baseApiUrl;

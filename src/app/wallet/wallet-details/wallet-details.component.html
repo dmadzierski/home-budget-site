@@ -1,24 +1,20 @@
 <div class="row">
-  <div class="col-md-6 offset-md-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <h1>{{wallet?.name}}</h1>
-          <h1>Balance: {{wallet?.balance}}zł</h1>
-        </div>
-        <div class="col-3 edit-button" role="button">
-          <a (click)="editWallet()" class=" text-center" role="button">
-            <img class="p-2" src="/assets/icon/edit-icon-big.png"/> Edit wallet
-          </a>
-        </div>
-        <div class="col-3 add-button" role="button">
-          <a (click)="addTransaction()" class="add-button text-center" role="button">
-            <img class="p-2" src="/assets/icon/plus-icon.png"/>Add transaction
-          </a>
-        </div>
-      </div>
-    </div>
+  <div class="col-lg-8 offset-lg-2">
+    <h2 class="mx-4">Name: {{wallet?.name}}</h2>
+    <h2 class="mx-4">Balance: {{wallet?.balance}}€</h2>
     <transactions-viewer (updateWallet)="initWallet()" [transactions]="wallet?.transactions"
                          [walletId]="walletId"></transactions-viewer>
+  </div>
+  <div class="col-lg-1 col-6 edit-button text-center my-lg-1" role="button">
+    <a (click)="editWallet()" role="button">
+      <img class="p-lg-2" src="/assets/icon/edit-icon-big.png"/>
+      <p>Edit wallet</p>
+    </a>
+  </div>
+  <div class="col-lg-1 col-6 add-button text-center my-lg-1" role="button">
+    <a (click)="addTransaction()" role="button">
+      <img class="p-lg-2" src="/assets/icon/plus-icon.png"/>
+      <p class="text-center">Add transaction</p>
+    </a>
   </div>
 </div>

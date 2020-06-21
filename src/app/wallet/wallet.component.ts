@@ -3,6 +3,7 @@ import {Wallet} from '../models/wallet.model';
 import {WalletHttpService} from './wallet.http.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {UserHttpService} from '../user/user.http.service';
 
 @Component({
   selector: 'app-wallet-creator',
@@ -11,13 +12,16 @@ import {Router} from '@angular/router';
 })
 export class WalletComponent implements OnInit {
   wallets: Array<Wallet> = new Array<Wallet>();
+  favoriteWalletId: bigint;
 
-  constructor(private http: HttpClient, private walletHttpService: WalletHttpService, private router: Router) {
-    this.getWallets();
+  constructor(private http: HttpClient, private walletHttpService: WalletHttpService, private router: Router,
+              private userHttpService: UserHttpService) {
+    this.initWallets();
+    this.initFavoriteWalletId();
   }
 
 
-  getWallets(): void {
+  initWallets(): void {
     this.walletHttpService.getWallets().subscribe(success => {
       this.wallets = success;
     }, error => {
@@ -32,4 +36,21 @@ export class WalletComponent implements OnInit {
   }
 
 
+  private initFavoriteWalletId() {
+    this.userHttpService.userProfile().subscribe(success => {
+      this.favoriteWalletId = success['favoriteWalletId'];
+    });
+  }
+
+  changeFavoriteWallet(walletId: bigint) {
+    if (walletId === this.favoriteWalletId) {
+      this.userHttpService.setFavoriteWallet(null).subscribe(success => {
+        this.favoriteWalletId = null;
+      });
+    } else {
+      this.userHttpService.setFavoriteWallet(walletId).subscribe(success => {
+        this.favoriteWalletId = walletId;
+      });
+    }
+  }
 }

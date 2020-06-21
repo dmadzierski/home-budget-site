@@ -13,4 +13,8 @@ export class UserHttpService {
   userProfile() {
     return this.http.get(ApiUri.userProfile);
   }
+
+  setFavoriteWallet(walletId: bigint) {
+    return this.http.post(ApiUri.setFavoriteWallet, walletId);
+  }
 }
