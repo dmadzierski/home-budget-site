@@ -19,6 +19,9 @@ import {TransactionComponent} from './transaction/transaction.component';
 import {CategoryComponent} from './category/category.component';
 import {CategoryCreatorComponent} from './category/category-creator/category-creator.component';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {TransactionEditorComponent} from './transaction/transaction-editor/transaction-editor.component';
+import {WalletEditorComponent} from './wallet/wallet-editor/wallet-editor.component';
+
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -28,8 +31,12 @@ const routes: Routes = [
   {path: 'wallet', component: WalletComponent},
   {path: 'wallet/add', component: WalletCreatorComponent},
   {path: 'wallet/details', component: WalletDetailsComponent},
+  {path: 'wallet/edit', component: WalletEditorComponent},
   {path: 'category', component: CategoryComponent},
-  {path: 'category/add', component: CategoryCreatorComponent}
+  {path: 'category/add', component: CategoryCreatorComponent},
+  {path: 'transaction', component: TransactionComponent},
+  {path: 'transaction/add', component: TransactionCreatorComponent},
+  {path: 'transaction/edit', component: TransactionEditorComponent},
 ];
 
 
@@ -66,6 +73,8 @@ export class XhrInterceptor implements HttpInterceptor {
     TransactionComponent,
     CategoryComponent,
     CategoryCreatorComponent,
+    TransactionEditorComponent,
+    WalletEditorComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

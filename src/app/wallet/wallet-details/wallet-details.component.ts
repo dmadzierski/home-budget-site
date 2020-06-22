@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {WalletHttpService} from '../wallet.http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Wallet} from '../../models/wallet.model';
@@ -8,32 +8,45 @@ import {Wallet} from '../../models/wallet.model';
   templateUrl: './wallet-details.component.html',
   styleUrls: ['./wallet-details.component.css']
 })
-export class WalletDetailsComponent implements OnInit {
+export class WalletDetailsComponent implements OnInit, OnChanges {
 
   public wallet: Wallet;
-  private id: number;
+  walletId: bigint;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private walletHttpService: WalletHttpService) {
+    this.activatedRoute
+      .queryParams
+      .subscribe(params => {
+        if (isNaN(Number(params['walletId']))) {
+          router.navigateByUrl('/wallet');
+        } else {
+          this.walletId = params['walletId'];
+          this.initWallet();
+        }
+      });
   }
 
   ngOnInit(): void {
-    this.route
-      .queryParams
-      .subscribe(params => {
-        this.id = params['id'];
-      });
-    this.getWallet();
   }
 
   addTransaction() {
-
+    this.router.navigateByUrl('/transaction/add?walletId=' + this.walletId);
   }
 
-  private getWallet() {
-    this.walletHttpService.getWalletWithDetails(this.id).subscribe(k => {
-      this.wallet = k;
+  ngOnChanges(): void {
+    this.initWallet();
+  }
+
+  initWallet() {
+    this.walletHttpService.getWalletWithDetails(this.walletId).subscribe(success => {
+      this.wallet = success;
     });
+  }
+
+
+  editWallet() {
+    this.router.navigateByUrl('/wallet/edit?walletId=' + this.walletId);
   }
 }

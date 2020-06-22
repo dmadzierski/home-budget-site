@@ -9,10 +9,11 @@ import {AuthService} from './auth.service';
 })
 export class AppComponent {
 
-  title = 'Home budget';
   private protectedRoutes: Array<string> = [
     '/wallet',
-    '/category'
+    '/category',
+    '/user',
+    '/transaction'
   ];
 
   constructor(private router: Router, private authService: AuthService, private activatedRoute: ActivatedRoute) {

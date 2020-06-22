@@ -21,7 +21,11 @@ export class WalletHttpService {
     return this.http.get(ApiUri.userWallets);
   }
 
-  getWalletWithDetails(id: number): Observable<any> {
+  getWalletWithDetails(id: bigint): Observable<any> {
     return this.http.get(ApiUri.wallet + '/' + id);
+  }
+
+  editWallet(wallet: Wallet): Observable<any> {
+    return this.http.post(ApiUri.editWallet, wallet);
   }
 }

@@ -1,1 +1,43 @@
-<p>transaction-creator works!</p>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <form (ngSubmit)="addTransaction()">
+      <div class="form-group">
+        <label>Name</label>
+        <input [(ngModel)]="transaction.name" class="form-control" name="name"/>
+        <error [errorsList]="error?.name"></error>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input [(ngModel)]="transaction.description" class="form-control" name="description"/>
+      </div>
+      <div class="form-group">
+        <label>Price</label>
+        <input [(ngModel)]="transaction.price" class="form-control" name="price" type="number"/>
+        <error [errorsList]="error?.price"></error>
+      </div>
+      <div class="form-group">
+        <label>Date of purchase</label>
+        <input [(ngModel)]="transaction.dateOfPurchase" class="form-control" name="date" type="datetime-local"/>
+      </div>
+      <div class="form-group">
+        <label>Select category</label>
+        <select (change)="this.setUserChooseTransactionBack()" [(ngModel)]="categoryId" class="form-control"
+                name="transactionType">
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </option>
+        </select>
+        <error [errorsList]="error?.category"></error>
+      </div>
+      <div *ngIf="userChooseTransactionBack" class="form-group">
+        <label>Select transaction</label>
+        <select [(ngModel)]="transaction.transactionIdReference" class="form-control" name="transactionType">
+          <option *ngFor="let transaction of loanOrBorrowTransactions" [value]="transaction.id">
+            {{transaction.name}} {{transaction.description}} {{transaction.price}} {{transaction.category.transactionType|titlecase}} {{transaction.dateOfPurchase|date}}
+          </option>
+        </select>
+      </div>
+      <button class="btn btn-block btn-outline-success" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

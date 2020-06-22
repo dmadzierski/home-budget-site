@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../models/user.model';
 import {AuthService} from '../auth.service';
+import {UserHttpService} from '../user/user.http.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,12 @@ import {AuthService} from '../auth.service';
 export class LoginComponent implements OnInit {
   user: User = new User();
 
-  emailErrors: Array<string> = new Array<string>();
-  passwordErrors: Array<string> = new Array<string>();
+  errors: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userHttpService: UserHttpService) {
   }
 
   ngOnInit(): void {
@@ -24,8 +25,14 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.authenticate(this.user, () => {
-      this.router.navigateByUrl('/');
+      this.userHttpService.userProfile().subscribe(success => {
+          this.router.navigateByUrl('/wallet/details?walletId=' + success['favoriteWalletId']);
+        }
+      );
     });
+    if (this.authService.isAuthenticated() && this.user.password?.length > 0 && this.user.email?.length > 0) {
+      this.errors = {email: ['Incompatibile user or password or both']};
+    }
     return false;
   }
 }

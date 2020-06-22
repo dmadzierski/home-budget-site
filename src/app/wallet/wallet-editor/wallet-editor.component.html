@@ -1,16 +1,11 @@
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
-    <form (ngSubmit)="addWallet()">
+    <form (ngSubmit)="editWallet()">
       <div class="form-group">
         <label>Name</label>
         <input [(ngModel)]="wallet.name" class="form-control" name="name" type="text">
+        <error [errorsList]="error?.name"></error>
       </div>
-      <error [errorsList]="error?.name"></error>
-      <div class="form-group">
-        <label>Balance</label>
-        <input [(ngModel)]="wallet.balance" class="form-control" name="password" type="balance">
-      </div>
-      <error [errorsList]="error?.balance"></error>
       <button class="btn btn-block btn-outline-success" type="submit">Submit</button>
     </form>
   </div>

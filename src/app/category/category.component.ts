@@ -8,7 +8,7 @@ import {CategoryHttpService} from './category.http.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  categories: Array<Category>;
+  categories: Array<Category> = new Array<Category>();
 
 
   constructor(private categoryHttpService: CategoryHttpService) {
@@ -18,9 +18,21 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  removeCategory(categoyrId: bigint) {
+    this.categoryHttpService.removeCategory(categoyrId).subscribe(success => {
+      this.categories = this.categories.filter(category => category.id !== categoyrId);
+    });
+  }
+
   private getCategories() {
-    this.categoryHttpService.getCategories().subscribe(success => {
-      console.log(success);
+    this.categoryHttpService.getUserCategories().subscribe(success => {
+      this.categories = success;
+    }, error => {
+    });
+  }
+
+  restoreDefaultCategories() {
+    this.categoryHttpService.restoreDefaultCategories().subscribe((success: Array<Category>) => {
       this.categories = success;
     }, error => {
     });

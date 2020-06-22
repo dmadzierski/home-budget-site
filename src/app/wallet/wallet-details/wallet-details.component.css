@@ -1,3 +1,8 @@
-.plus-icon {
+.add-button {
+  cursor: pointer;
 
+}
+
+.edit-button {
+  cursor: pointer;
 }

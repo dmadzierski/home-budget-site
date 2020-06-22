@@ -8,3 +8,7 @@ nav, footer {
   min-height: 10vh !important;
   padding: 0;
 }
+
+.pointer {
+  cursor: pointer;
+}

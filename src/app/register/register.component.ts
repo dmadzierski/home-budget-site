@@ -11,6 +11,7 @@ import {User} from '../models/user.model';
 export class RegisterComponent implements OnInit {
   user: User = new User();
   errors: any;
+  repeatPassword: string = '';
 
   constructor(private registerHttpService: RegisterHttpService, private router: Router) {
   }
@@ -20,10 +21,15 @@ export class RegisterComponent implements OnInit {
 
 
   registerUser() {
-    this.registerHttpService.registerUser(this.user).subscribe(post => {
-      this.router.navigate(['/login']);
-    }, error => {
-      this.errors = error.error.errors;
-    });
+    if (this.user.password === this.repeatPassword) {
+      this.registerHttpService.registerUser(this.user).subscribe(post => {
+        this.router.navigate(['/login']);
+      }, error => {
+        this.errors = error.error.errors;
+        console.log(this.errors);
+      });
+    } else {
+      this.errors = {password: ['Password are not the same']};
+    }
   }
 }

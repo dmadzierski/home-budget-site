@@ -16,7 +16,15 @@ export class CategoryHttpService {
     return this.http.put(ApiUri.addCategory, category);
   }
 
-  getCategories(): Observable<any> {
+  getUserCategories(): Observable<any> {
     return this.http.get(ApiUri.userCategories);
+  }
+
+  removeCategory(id: bigint) {
+    return this.http.delete(ApiUri.removeCategory(id));
+  }
+
+  restoreDefaultCategories() {
+    return this.http.post(ApiUri.restoreDefaultCategories, {});
   }
 }

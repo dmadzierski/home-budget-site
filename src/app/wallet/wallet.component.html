@@ -1,21 +1,24 @@
 <div class="row">
-  <div class="col-md-6 offset-md-3">
+  <div class="col-lg-6 offset-lg-3">
     <div *ngIf="wallets.length > 0;else noWallets">
       <h3 class="text-center text-vertical-center">Wallet list</h3>
-      <table class="table table-hover table-striped text-center">
+      <table class="table table-hover text-center">
         <tr>
           <th></th>
+          <th>Favorite</th>
           <th>Name</th>
           <th>Balance</th>
         </tr>
-        <tr *ngFor="let wallet of wallets; let i = index">
+        <tr *ngFor="let wallet of wallets; let i = index" class="text-center">
+          <td>{{i + 1}}</td>
           <td>
-            <a (click)="showWalletsDetails(wallet.id)" class="text-decoration-none text-black"
-               role="button"> {{i + 1}}</a></td>
-          <td><a (click)="showWalletsDetails(wallet.id)" class="text-decoration-none text-black"
-                 role="button"> {{wallet.name}}</a></td>
-          <td><a (click)="showWalletsDetails(wallet.id)" class="text-decoration-none text-black"
-                 role="button"> {{wallet.balance}}</a></td>
+            <a (click)="changeFavoriteWallet(wallet.id)" role="button">
+              <img *ngIf="wallet.id === favoriteWalletId" class="p-lg-2" src="/assets/icon/star-icon.png"/>
+              <img *ngIf="wallet.id !== favoriteWalletId" class="p-lg-2" src="/assets/icon/empty-star-icon.png"/>
+            </a>
+          </td>
+          <td (click)="showWalletsDetails(wallet.id)" class="py-lg-4">{{wallet.name}}</td>
+          <td (click)="showWalletsDetails(wallet.id)" class="py-lg-4">{{wallet.balance}}</td>
         </tr>
       </table>
     </div>

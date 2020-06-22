@@ -21,7 +21,7 @@ export class WalletCreatorComponent implements OnInit {
 
   addWallet() {
     this.walletHttpService.addWallet(this.wallet).subscribe(success => {
-        this.router.navigateByUrl('/wallet/details?id=' + success.id);
+        this.router.navigateByUrl('/wallet/details?walletId=' + success.id);
       },
       error => {
         this.error = error.error.errors;
