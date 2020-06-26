@@ -1,4 +1,5 @@
 import {environment} from '../environments/environment';
+import {TransactionStatisticsAndPagingAndSorting} from './models/transaction.model';
 
 export class ApiUri {
   public static register: string = ApiUri.getBase() + '/register';
@@ -32,19 +33,55 @@ export class ApiUri {
   }
 
   static getBorrowTransactions(walletId: bigint) {
-    return ApiUri.wallet + '/' + walletId + '/borrow_transaction';
+    return ApiUri.wallet + '/' + walletId + '/transactions?transactionType=BORROW&isFinished=false';
   }
 
   static getLoanTransaction(walletId: bigint) {
-    return ApiUri.wallet + '/' + walletId + '/loan_transaction';
+    return ApiUri.wallet + '/' + walletId + '/transactions?transactionType=LOAN&isFinished=false';
   }
 
   static removeCategory(id: bigint) {
     return ApiUri.category + '/remove/' + id;
   }
 
-  static getWalletTransactions(walletId: bigint) {
-    return ApiUri.wallet + '/' + walletId + '/transactions';
+  static getWalletTransactions(transactionSaPaS: TransactionStatisticsAndPagingAndSorting) {
+    let link = ApiUri.wallet + '/' + transactionSaPaS.walletId + '/transactions';
+
+    let linkHasAnyParam = false;
+    if (transactionSaPaS.pageSize) {
+      link = this.getLinkWithParam(link, 'size', transactionSaPaS.pageSize, linkHasAnyParam);
+      linkHasAnyParam = true;
+    }
+    if (transactionSaPaS.pageIndex) {
+      link = this.getLinkWithParam(link, 'page', transactionSaPaS.pageIndex, linkHasAnyParam);
+      linkHasAnyParam = true;
+    }
+    if (transactionSaPaS.minPrice) {
+      link = this.getLinkWithParam(link, 'minPrice', transactionSaPaS.minPrice, linkHasAnyParam);
+      linkHasAnyParam = true;
+    }
+    if (transactionSaPaS.maxPrice) {
+      link = this.getLinkWithParam(link, 'maxPrice', transactionSaPaS.maxPrice, linkHasAnyParam);
+      linkHasAnyParam = true;
+    }
+    if (transactionSaPaS.sortBy && transactionSaPaS.sortDirection) {
+      link = this.getLinkWithParam(link, 'sort', transactionSaPaS.sortBy + ',' + transactionSaPaS.sortDirection, linkHasAnyParam);
+      linkHasAnyParam = true;
+    }
+    if (transactionSaPaS.dateOfPurchaseStart) {
+      link = this.getLinkWithParam(link, 'start', transactionSaPaS.dateOfPurchaseStart + 'T00:00:00', linkHasAnyParam);
+      linkHasAnyParam = true;
+    }
+    if (transactionSaPaS.dateOfPurchaseEnd) {
+      link = this.getLinkWithParam(link, 'end', transactionSaPaS.dateOfPurchaseEnd + 'T23:59:59', linkHasAnyParam);
+      linkHasAnyParam = true;
+    }
+    if (transactionSaPaS.transactionType) {
+      link = this.getLinkWithParam(link, 'transactionType', transactionSaPaS.transactionType, linkHasAnyParam);
+      linkHasAnyParam = true;
+    }
+
+    return link;
   }
 
   static getTransaction(walletId: bigint, transactionId: bigint) {
@@ -57,5 +94,9 @@ export class ApiUri {
 
   public static switchTransactionIsFinished(walletId: bigint, transactionId: bigint) {
     return ApiUri.wallet + '/' + walletId + '/transaction/switchIsFinished/' + transactionId;
+  }
+
+  private static getLinkWithParam(link: string, param: string, paramValue: any, linkHasAnyParam: boolean): string {
+    return link + (linkHasAnyParam ? '&' : '?') + param + '=' + paramValue;
   }
 }

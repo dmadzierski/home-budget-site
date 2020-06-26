@@ -11,3 +11,16 @@ export class Transaction extends Serializable {
   public transactionIdReference: bigint;
   public isFinished: boolean;
 }
+
+export class TransactionStatisticsAndPagingAndSorting {
+  public pageSize: number;
+  public pageIndex: number;
+  public sortBy: string;
+  public sortDirection: string;
+  public transactionType: string;
+  public dateOfPurchaseStart: string;
+  public dateOfPurchaseEnd: string;
+  public minPrice: number;
+  public maxPrice: number;
+  public walletId: bigint;
+}

@@ -1,9 +1,64 @@
 <div class="row">
-  <div class="col-lg-8 offset-lg-2">
+  <div class="col-lg-3 col-12">
+    <div class="form-group">
+      <label for="sortBy">Sort by</label>
+      <select [(ngModel)]="transactionSaPaS.sortBy" class="form-control" id="sortBy">
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+        <option value="dateOfPurchase">Date of purchase</option>
+        <option value="category.name">Category name</option>
+        <option value="category.TransactionType">Transaction type</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="sortDirection">Sort direction</label>
+      <select [(ngModel)]="transactionSaPaS.sortDirection" class="form-control" id="sortDirection">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="pageSize">Number of transactions</label>
+      <input [(ngModel)]="transactionSaPaS.pageSize" class="form-control" id="pageSize" max="30" min="1" step="1"
+             type="number">
+    </div>
+    <div class="form-row form-group">
+      <div class="col-6">
+        <label for="minPrice">Min price</label>
+        <input [(ngModel)]="transactionSaPaS.minPrice" class="form-control" id="minPrice" type="number"/>
+      </div>
+      <div class="col-6">
+        <label for="maxPrice">Max price</label>
+        <input [(ngModel)]="transactionSaPaS.maxPrice" class="form-control" id="maxPrice" type="number"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="start">Start</label>
+      <input [(ngModel)]="transactionSaPaS.dateOfPurchaseStart" class="form-control" id="start" type="date"/>
+    </div>
+    <div class="form-group">
+      <label for="end">End</label>
+      <input [(ngModel)]="transactionSaPaS.dateOfPurchaseEnd" class="form-control" id="end" type="date"/>
+    </div>
+    <div class="form-group">
+      <label for="transactionType">Transaction type</label>
+      <select [(ngModel)]="transactionSaPaS.transactionType" id="transactionType" class="form-control"
+              name="transactionType">
+        <option [value]="undefined">All</option>
+        <option *ngFor="let transactionType of transactionTypes" [value]="transactionType">
+          {{transactionType.replace("_", " ") | titlecase}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button (click)="refreshTransactions()" class="btn btn-block btn-outline-success">Refresh</button>
+    </div>
+  </div>
+  <div class="col-lg-7">
     <h2 class="mx-4">Name: {{wallet?.name}}</h2>
     <h2 class="mx-4">Balance: {{wallet?.balance}}€</h2>
-    <transactions-viewer (updateWallet)="initWallet()" [transactions]="wallet?.transactions"
-                         [walletId]="walletId"></transactions-viewer>
+    <transactions-viewer (updateWallet)="initWallet()"
+                         [transactionSaPaS]="transactionSaPaS"></transactions-viewer>
   </div>
   <div class="col-lg-1 col-6 edit-button text-center my-lg-1" role="button">
     <a (click)="editWallet()" role="button">
@@ -15,6 +70,18 @@
     <a (click)="addTransaction()" role="button">
       <img class="p-lg-2" src="/assets/icon/plus-icon.png"/>
       <p class="text-center">Add transaction</p>
+    </a>
+  </div>
+  <div class="col-lg-6 col-6 next-button text-center my-lg-1" role="button">
+    <a (click)="previousPage()" role="button">
+      <img class="p-lg-2" src="/assets/icon/previous-icon.png"/>
+      <p class="text-center">Previous page</p>
+    </a>
+  </div>
+  <div class="col-lg-6 col-6 next-button text-center my-lg-1" role="button">
+    <a (click)="nextPage()" role="button">
+      <img class="p-lg-2" src="/assets/icon/next-icon.png"/>
+      <p class="text-center">Next page</p>
     </a>
   </div>
 </div>

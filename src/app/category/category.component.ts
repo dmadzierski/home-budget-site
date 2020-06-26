@@ -24,15 +24,15 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  private getCategories() {
-    this.categoryHttpService.getUserCategories().subscribe(success => {
+  restoreDefaultCategories() {
+    this.categoryHttpService.restoreDefaultCategories().subscribe((success: Array<Category>) => {
       this.categories = success;
     }, error => {
     });
   }
 
-  restoreDefaultCategories() {
-    this.categoryHttpService.restoreDefaultCategories().subscribe((success: Array<Category>) => {
+  private getCategories() {
+    this.categoryHttpService.getUserCategories().subscribe(success => {
       this.categories = success;
     }, error => {
     });

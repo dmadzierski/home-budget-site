@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Transaction} from '../models/transaction.model';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Transaction, TransactionStatisticsAndPagingAndSorting} from '../models/transaction.model';
 import {TransactionHttpService} from './transaction.http.service';
 import {Router} from '@angular/router';
 
@@ -8,36 +8,47 @@ import {Router} from '@angular/router';
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.css']
 })
-export class TransactionComponent implements OnInit {
-  @Input()
+export class TransactionComponent implements OnInit, OnChanges {
+
   transactions: Array<Transaction>;
   @Input()
-  walletId: bigint;
-
+  transactionSaPaS: TransactionStatisticsAndPagingAndSorting;
   @Output()
   updateWallet = new EventEmitter<boolean>();
+  private lastPageSize;
 
   constructor(private transactionHttpService: TransactionHttpService, private router: Router) {
-    this.transactions = new Array<Transaction>();
   }
 
-  ngOnInit(): void {
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.initWalletTransactions();
   }
 
+  ngOnInit(): void {
+  }
+
   editTransaction(transactionId: bigint) {
-    this.router.navigateByUrl('/transaction/edit?walletId=' + this.walletId + '&transactionId=' + transactionId);
+    this.router.navigateByUrl('/transaction/edit?walletId=' + this.transactionSaPaS.walletId + '&transactionId=' + transactionId);
   }
 
   initWalletTransactions() {
-    this.transactionHttpService.getWalletTransactions(this.walletId).subscribe((success: Array<Transaction>) => {
-      this.transactions = success;
+    if (this.lastPageSize !== this.transactionSaPaS.pageSize) {
+      this.transactionSaPaS.pageIndex = 0;
+    }
+    this.transactionHttpService.getWalletTransactions(this.transactionSaPaS).subscribe((success: Array<Transaction>) => {
+      if (success.length > 0) {
+        this.transactions = success;
+        this.lastPageSize = this.transactionSaPaS.pageSize;
+      } else {
+        this.transactionSaPaS.pageIndex--;
+      }
     }, error => {
     });
   }
 
   removeTransaction(transactionId: bigint): void {
-    this.transactionHttpService.removeTransaction(this.walletId, transactionId).subscribe(success => {
+    this.transactionHttpService.removeTransaction(this.transactionSaPaS.walletId, transactionId).subscribe(success => {
       this.transactions = this.transactions.filter(transaction => transaction.id !== transactionId);
       this.updateWallet.emit(true);
     }, error => {
@@ -46,8 +57,8 @@ export class TransactionComponent implements OnInit {
   }
 
   switchFinished(transactionId: bigint) {
-    this.transactionHttpService.switchIsFinished(this.walletId, transactionId).subscribe((success: Transaction) => {
-      for (let i in this.transactions) {
+    this.transactionHttpService.switchIsFinished(this.transactionSaPaS.walletId, transactionId).subscribe((success: Transaction) => {
+      for (const i in this.transactions) {
         if (this.transactions[i].id === transactionId) {
           this.transactions[i] = success;
         }

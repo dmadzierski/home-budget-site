@@ -19,6 +19,7 @@ export class TransactionCreatorComponent implements OnInit {
   walletId: bigint;
   categories: Array<Category> = new Array<Category>();
   userChooseTransactionBack: boolean;
+  currentDate = Date.now();
 
   constructor(private transactionHttpService: TransactionHttpService,
               private activatedRoute: ActivatedRoute,
@@ -29,6 +30,7 @@ export class TransactionCreatorComponent implements OnInit {
         this.walletId = params['walletId'];
       });
     this.initUserCategories();
+    this.transaction.dateOfPurchase = new Date().toISOString().substring(0, 16);
   }
 
   ngOnInit(): void {
