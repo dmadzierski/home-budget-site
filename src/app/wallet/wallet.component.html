@@ -17,8 +17,8 @@
               <img *ngIf="wallet.id !== favoriteWalletId" class="p-lg-2" src="/assets/icon/empty-star-icon.png"/>
             </a>
           </td>
-          <td (click)="showWalletsDetails(wallet.id)" class="py-lg-4">{{wallet.name}}</td>
-          <td (click)="showWalletsDetails(wallet.id)" class="py-lg-4">{{wallet.balance}}</td>
+          <td (click)="showWalletsDetails(wallet.id)" class="py-lg-4 pointer">{{wallet.name}}</td>
+          <td (click)="showWalletsDetails(wallet.id)" class="py-lg-4 pointer">{{wallet.balance}}</td>
         </tr>
       </table>
     </div>

@@ -24,8 +24,8 @@
       </a>
     </td>
     <td>
-      <a (click)="switchFinished(transaction.id)" class="pointer" role="button"
-         *ngIf="isLoanOrBorrow(transaction)">
+      <a (click)="switchFinished(transaction.id)" *ngIf="isLoanOrBorrow(transaction)" class="pointer"
+         role="button">
         <img *ngIf="!transaction.isFinished" src="/assets/icon/un-finished-icon.png"/>
         <img *ngIf="transaction.isFinished" src="/assets/icon/finished-icon.png"/>
       </a>

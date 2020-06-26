@@ -35,13 +35,6 @@ export class WalletComponent implements OnInit {
     this.router.navigateByUrl('/wallet/details?walletId=' + id);
   }
 
-
-  private initFavoriteWalletId() {
-    this.userHttpService.userProfile().subscribe(success => {
-      this.favoriteWalletId = success['favoriteWalletId'];
-    });
-  }
-
   changeFavoriteWallet(walletId: bigint) {
     if (walletId === this.favoriteWalletId) {
       this.userHttpService.setFavoriteWallet(null).subscribe(success => {
@@ -52,5 +45,11 @@ export class WalletComponent implements OnInit {
         this.favoriteWalletId = walletId;
       });
     }
+  }
+
+  private initFavoriteWalletId() {
+    this.userHttpService.userProfile().subscribe(success => {
+      this.favoriteWalletId = success['favoriteWalletId'];
+    });
   }
 }

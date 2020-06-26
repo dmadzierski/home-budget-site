@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ApiUri} from '../api.uri';
-import {Transaction} from '../models/transaction.model';
+import {Transaction, TransactionStatisticsAndPagingAndSorting} from '../models/transaction.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -33,8 +33,8 @@ export class TransactionHttpService {
     return this.http.get(ApiUri.getLoanTransaction(walletId));
   }
 
-  getWalletTransactions(walletId: bigint) {
-    return this.http.get(ApiUri.getWalletTransactions(walletId));
+  getWalletTransactions(transactionSaPaS: TransactionStatisticsAndPagingAndSorting) {
+    return this.http.get(ApiUri.getWalletTransactions(transactionSaPaS));
   }
 
   getTransaction(walletId: bigint, transactionId: bigint) {
