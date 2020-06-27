@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RegisterHttpService} from './register.http.service';
 import {Router} from '@angular/router';
 import {User} from '../models/user.model';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +12,9 @@ import {User} from '../models/user.model';
 export class RegisterComponent implements OnInit {
   user: User = new User();
   errors: any;
-  repeatPassword: string = '';
+  repeatPassword = '';
 
-  constructor(private registerHttpService: RegisterHttpService, private router: Router) {
+  constructor(private registerHttpService: RegisterHttpService, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -25,8 +26,7 @@ export class RegisterComponent implements OnInit {
       this.registerHttpService.registerUser(this.user).subscribe(post => {
         this.router.navigate(['/login']);
       }, error => {
-        this.errors = error.error.errors;
-        console.log(this.errors);
+        this.errors = error.error?.errors;
       });
     } else {
       this.errors = {password: ['Password are not the same']};

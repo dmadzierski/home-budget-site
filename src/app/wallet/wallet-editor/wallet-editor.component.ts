@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {WalletHttpService} from '../wallet.http.service';
 import {Wallet} from '../../models/wallet.model';
 
@@ -14,7 +14,8 @@ export class WalletEditorComponent implements OnInit {
   wallet: Wallet;
   error: any;
 
-  constructor(private activatedRoute: ActivatedRoute, private walletHttpService: WalletHttpService) {
+  constructor(private activatedRoute: ActivatedRoute, private walletHttpService: WalletHttpService,
+              private router: Router) {
     this.activatedRoute
       .queryParams
       .subscribe(params => {
@@ -35,6 +36,7 @@ export class WalletEditorComponent implements OnInit {
   editWallet() {
     this.walletHttpService.editWallet(this.wallet).subscribe((success: Wallet) => {
         this.wallet = success;
+        this.router.navigateByUrl('/wallet/details?walletId=' + this.walletId);
       }, error => {
         this.error = error.error.errors;
         console.log(this.error);

@@ -28,4 +28,8 @@ export class WalletHttpService {
   editWallet(wallet: Wallet): Observable<any> {
     return this.http.post(ApiUri.editWallet, wallet);
   }
+
+  remove(id: bigint) {
+    return this.http.delete(ApiUri.removeWallet(id));
+  }
 }

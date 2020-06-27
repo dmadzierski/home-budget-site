@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Category} from '../../models/category.model';
 import {CategoryHttpService} from '../category.http.service';
 import {TransactionHttpService} from '../../transaction/transaction.http.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-category-creator',
@@ -16,7 +17,8 @@ export class CategoryCreatorComponent implements OnInit {
   transactionTypeString: string;
 
 
-  constructor(private categoryHttpService: CategoryHttpService, private transactionHttpService: TransactionHttpService) {
+  constructor(private categoryHttpService: CategoryHttpService, private transactionHttpService: TransactionHttpService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class CategoryCreatorComponent implements OnInit {
   addCategory() {
     this.category.transactionType = this.transactionTypeString.toUpperCase().replace(' ', '_');
     this.categoryHttpService.addCategory(this.category).subscribe(success => {
+        this.router.navigateByUrl('/category');
       },
       error => {
         this.error = error.error.errors;
