@@ -2,7 +2,7 @@
   <div class="col-lg-6 offset-lg-3">
     <form (ngSubmit)="editWallet()">
       <div class="form-group">
-        <label>Name</label>
+        <label>Write wallet name to delete him: {{wallet.name}}</label>
         <input [(ngModel)]="wallet.name" class="form-control" name="name" type="text">
         <error [errorsList]="error?.name"></error>
       </div>

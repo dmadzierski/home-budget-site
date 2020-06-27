@@ -11,6 +11,11 @@ export class ApiUri {
   public static addWallet: string = ApiUri.wallet + '/add';
   public static editWallet: string = ApiUri.wallet + '/edit';
 
+  public static removeWallet(id: bigint) {
+    return ApiUri.wallet + '/remove/' + id;
+  }
+
+
   public static category: string = ApiUri.getBase() + '/category';
   public static addCategory: string = ApiUri.category + '/add';
   public static userCategories: string = ApiUri.category;

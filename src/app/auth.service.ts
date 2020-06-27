@@ -17,10 +17,12 @@ export class AuthService {
     return this.authenticated;
   }
 
+  private atLastOneAuth = false;
+
   authenticate(user, callback): void {
     if (localStorage.getItem('email') !== undefined && localStorage.getItem('email') !== null
       && localStorage.getItem('basicauth') !== undefined && localStorage.getItem('basicauth') !== null
-      && user === undefined) {
+      && user === undefined && this.atLastOneAuth) {
       this.authenticated = true;
       return;
     }
@@ -35,6 +37,7 @@ export class AuthService {
       }
       if (response['name'] !== null) {
         if (user !== undefined) {
+          this.atLastOneAuth = true;
           localStorage.setItem('email', user.email);
           localStorage.setItem('basicauth', authString);
         }

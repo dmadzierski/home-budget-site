@@ -52,4 +52,8 @@ export class WalletComponent implements OnInit {
       this.favoriteWalletId = success['favoriteWalletId'];
     });
   }
+
+  goAddWallet() {
+    this.router.navigateByUrl('/wallet/add');
+  }
 }

@@ -104,4 +104,9 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
     this.transactionSaPaS.pageIndex = 0;
     this.transactionSaPaS.transactionType = undefined;
   }
+
+  removeWallet() {
+    this.router.navigateByUrl('/wallet/remove?walletId=' + this.walletId);
+  }
+
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Transaction} from '../../models/transaction.model';
 import {TransactionHttpService} from '../transaction.http.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Category} from '../../models/category.model';
 import {CategoryHttpService} from '../../category/category.http.service';
 
@@ -19,11 +19,11 @@ export class TransactionCreatorComponent implements OnInit {
   walletId: bigint;
   categories: Array<Category> = new Array<Category>();
   userChooseTransactionBack: boolean;
-  currentDate = Date.now();
 
   constructor(private transactionHttpService: TransactionHttpService,
               private activatedRoute: ActivatedRoute,
-              private categoryHttpService: CategoryHttpService) {
+              private categoryHttpService: CategoryHttpService,
+              private router: Router) {
     this.activatedRoute
       .queryParams
       .subscribe(params => {
@@ -59,6 +59,8 @@ export class TransactionCreatorComponent implements OnInit {
     }
     this.transactionHttpService.save(this.transaction, this.walletId, this.categoryId).subscribe(success => {
       this.error = null;
+      this.transaction = new Transaction();
+
     }, error => {
       this.error = error.error.errors;
     });
@@ -109,4 +111,7 @@ export class TransactionCreatorComponent implements OnInit {
   }
 
 
+  returnToWallet() {
+    this.router.navigateByUrl('/wallet/details?walletId=' + this.walletId);
+  }
 }

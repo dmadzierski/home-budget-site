@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from '../models/category.model';
 import {CategoryHttpService} from './category.http.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -11,7 +12,8 @@ export class CategoryComponent implements OnInit {
   categories: Array<Category> = new Array<Category>();
 
 
-  constructor(private categoryHttpService: CategoryHttpService) {
+  constructor(private categoryHttpService: CategoryHttpService,
+              private router: Router) {
     this.getCategories();
   }
 
@@ -36,5 +38,9 @@ export class CategoryComponent implements OnInit {
       this.categories = success;
     }, error => {
     });
+  }
+
+  goAddCategory() {
+    this.router.navigateByUrl('/category/add');
   }
 }
