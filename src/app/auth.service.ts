@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ApiUri} from './api.uri';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +8,14 @@ import {Router} from '@angular/router';
 export class AuthService {
   email: string;
   private authenticated = false;
+  private atLastOneAuth = false;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
   public isAuthenticated(): boolean {
     return this.authenticated;
   }
-
-  private atLastOneAuth = false;
 
   authenticate(user, callback): void {
     if (localStorage.getItem('email') !== undefined && localStorage.getItem('email') !== null

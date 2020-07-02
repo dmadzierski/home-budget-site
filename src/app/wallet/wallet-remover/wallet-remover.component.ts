@@ -10,10 +10,10 @@ import {WalletHttpService} from '../wallet.http.service';
 })
 export class WalletRemoverComponent implements OnInit {
 
-  private walletId: bigint;
   walletName = '';
   wallet: Wallet;
   errors: any;
+  private walletId: bigint;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,

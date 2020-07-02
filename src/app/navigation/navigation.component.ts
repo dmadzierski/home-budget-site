@@ -1,12 +1,11 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  templateUrl: './navigation.component.html'
 })
-export class NavigationComponent implements OnInit, OnChanges {
+export class NavigationComponent {
 
 
   constructor(private auth: AuthService) {
@@ -25,11 +24,4 @@ export class NavigationComponent implements OnInit, OnChanges {
   logout(): void {
     this.auth.logout();
   }
-
-  ngOnChanges(): void {
-  }
-
-  ngOnInit(): void {
-  }
-
 }

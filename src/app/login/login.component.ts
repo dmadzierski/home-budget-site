@@ -6,12 +6,10 @@ import {UserHttpService} from '../user/user.http.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-  user: User = new User();
-
+  user = {} as User;
   errors: any;
 
   constructor(private route: ActivatedRoute,

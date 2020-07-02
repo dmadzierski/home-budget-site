@@ -10,20 +10,17 @@ export class ApiUri {
   public static userWallets: string = ApiUri.wallet;
   public static addWallet: string = ApiUri.wallet + '/add';
   public static editWallet: string = ApiUri.wallet + '/edit';
-
-  public static removeWallet(id: bigint) {
-    return ApiUri.wallet + '/remove/' + id;
-  }
-
-
   public static category: string = ApiUri.getBase() + '/category';
   public static addCategory: string = ApiUri.category + '/add';
   public static userCategories: string = ApiUri.category;
-
   public static transactionTypes: string = ApiUri.getBase() + '/transaction/types';
   public static userProfile: string = ApiUri.getBase() + '/profile';
   static restoreDefaultCategories: string = ApiUri.category + '/restoreDefaultCategories';
   static setFavoriteWallet: string = ApiUri.user + '/setFavoriteWallet';
+
+  public static removeWallet(id: bigint) {
+    return ApiUri.wallet + '/remove/' + id;
+  }
 
   public static getBase(): string {
     return environment.baseApiUrl;

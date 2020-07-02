@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Transaction} from '../../models/transaction.model';
 import {TransactionHttpService} from '../transaction.http.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,10 +7,9 @@ import {CategoryHttpService} from '../../category/category.http.service';
 
 @Component({
   selector: 'app-transaction-creator',
-  templateUrl: './transaction-creator.component.html',
-  styleUrls: ['./transaction-creator.component.css']
+  templateUrl: './transaction-creator.component.html'
 })
-export class TransactionCreatorComponent implements OnInit {
+export class TransactionCreatorComponent {
 
   loanOrBorrowTransactions: Array<Transaction>;
   error: any;
@@ -33,8 +32,6 @@ export class TransactionCreatorComponent implements OnInit {
     this.transaction.dateOfPurchase = new Date().toISOString().substring(0, 16);
   }
 
-  ngOnInit(): void {
-  }
 
   initUserCategories() {
     this.categoryHttpService.getUserCategories().subscribe((success: Array<Category>) => {
@@ -106,12 +103,11 @@ export class TransactionCreatorComponent implements OnInit {
     }
   }
 
-  private clearLoanOrBorrowTransactions() {
-    this.loanOrBorrowTransactions = new Array<Transaction>();
-  }
-
-
   returnToWallet() {
     this.router.navigateByUrl('/wallet/details?walletId=' + this.walletId);
+  }
+
+  private clearLoanOrBorrowTransactions() {
+    this.loanOrBorrowTransactions = new Array<Transaction>();
   }
 }
