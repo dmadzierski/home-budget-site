@@ -1,23 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Category} from '../models/category.model';
 import {CategoryHttpService} from './category.http.service';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  templateUrl: './category.component.html'
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent {
   categories: Array<Category> = new Array<Category>();
 
 
   constructor(private categoryHttpService: CategoryHttpService,
               private router: Router) {
     this.getCategories();
-  }
-
-  ngOnInit(): void {
   }
 
   removeCategory(categoyrId: bigint) {
@@ -33,14 +29,14 @@ export class CategoryComponent implements OnInit {
     });
   }
 
+  goAddCategory() {
+    this.router.navigateByUrl('/category/add');
+  }
+
   private getCategories() {
     this.categoryHttpService.getUserCategories().subscribe(success => {
       this.categories = success;
     }, error => {
     });
-  }
-
-  goAddCategory() {
-    this.router.navigateByUrl('/category/add');
   }
 }

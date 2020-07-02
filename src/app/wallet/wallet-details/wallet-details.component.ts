@@ -16,6 +16,7 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
   public wallet: Wallet;
   walletId: bigint;
   transactionSaPaS = new TransactionStatisticsAndPagingAndSorting();
+  transactionTypes: Array<string>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -35,8 +36,6 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
         }
       });
   }
-
-  transactionTypes: Array<string>;
 
   initTransactionTypes() {
     this.transactionHttpService.getTypes().subscribe((success: Array<string>) => {
@@ -96,6 +95,10 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
     }
   }
 
+  removeWallet() {
+    this.router.navigateByUrl('/wallet/remove?walletId=' + this.walletId);
+  }
+
   private initDefaultTransactionSaPaS(): void {
     this.transactionSaPaS.walletId = this.walletId;
     this.transactionSaPaS.sortBy = 'dateOfPurchase';
@@ -103,10 +106,6 @@ export class WalletDetailsComponent implements OnInit, OnChanges {
     this.transactionSaPaS.pageSize = 9;
     this.transactionSaPaS.pageIndex = 0;
     this.transactionSaPaS.transactionType = undefined;
-  }
-
-  removeWallet() {
-    this.router.navigateByUrl('/wallet/remove?walletId=' + this.walletId);
   }
 
 }

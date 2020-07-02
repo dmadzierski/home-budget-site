@@ -12,3 +12,7 @@ nav, footer {
 .pointer {
   cursor: pointer;
 }
+
+cal-center {
+  vertical-align: center;
+}

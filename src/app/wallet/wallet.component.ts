@@ -47,13 +47,13 @@ export class WalletComponent implements OnInit {
     }
   }
 
+  goAddWallet() {
+    this.router.navigateByUrl('/wallet/add');
+  }
+
   private initFavoriteWalletId() {
     this.userHttpService.userProfile().subscribe(success => {
       this.favoriteWalletId = success['favoriteWalletId'];
     });
-  }
-
-  goAddWallet() {
-    this.router.navigateByUrl('/wallet/add');
   }
 }

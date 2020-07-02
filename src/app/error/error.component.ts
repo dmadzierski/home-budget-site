@@ -1,22 +1,9 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'error',
-  templateUrl: './error.component.html',
-  styleUrls: ['./error.component.css'],
+  templateUrl: './error.component.html'
 })
-export class ErrorComponent implements OnInit, OnChanges {
-
+export class ErrorComponent {
   @Input() errorsList: any;
-
-  constructor() {
-
-  }
-
-  ngOnInit(): void {
-  }
-
-  ngOnChanges(): void {
-  }
-
 }

@@ -6,8 +6,7 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-category-creator',
-  templateUrl: './category-creator.component.html',
-  styleUrls: ['./category-creator.component.css']
+  templateUrl: './category-creator.component.html'
 })
 export class CategoryCreatorComponent implements OnInit {
 

@@ -1,14 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TransactionHttpService} from '../transaction.http.service';
 import {Transaction} from '../../models/transaction.model';
 
 @Component({
   selector: 'app-transaction-editor',
-  templateUrl: './transaction-editor.component.html',
-  styleUrls: ['./transaction-editor.component.css']
+  templateUrl: './transaction-editor.component.html'
 })
-export class TransactionEditorComponent implements OnInit {
+export class TransactionEditorComponent {
   transaction: Transaction;
   error: any;
   dateOfPurchase: string;
@@ -31,9 +30,6 @@ export class TransactionEditorComponent implements OnInit {
       this.dateOfPurchase = success['dateOfPurchase'].substring(0, 16);
     }, error => {
     });
-  }
-
-  ngOnInit(): void {
   }
 
   editTransaction() {

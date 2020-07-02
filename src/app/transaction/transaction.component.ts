@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Transaction, TransactionStatisticsAndPagingAndSorting} from '../models/transaction.model';
 import {TransactionHttpService} from './transaction.http.service';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'transactions-viewer',
-  templateUrl: './transaction.component.html',
-  styleUrls: ['./transaction.component.css']
+  templateUrl: './transaction.component.html'
 })
-export class TransactionComponent implements OnInit, OnChanges {
+export class TransactionComponent implements OnChanges {
 
   transactions: Array<Transaction>;
   @Input()
@@ -23,9 +22,6 @@ export class TransactionComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.initWalletTransactions();
-  }
-
-  ngOnInit(): void {
   }
 
   editTransaction(transactionId: bigint) {
