@@ -13,7 +13,7 @@ export class RegisterHttpService {
   }
 
   public registerUser(user: User): Observable<any> {
-    return this.http.post(ApiUri.register, user);
+    return this.http.put(ApiUri.register, user);
   }
 
 }
